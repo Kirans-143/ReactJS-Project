@@ -1,21 +1,15 @@
 import React from "react";
 import "./App.css";
-import CreateBurger from "./CreateBurger";
-import { BurgerComponentEnum } from "./Resources";
+import Navbar from "./Components/Navbar/Navbar";
+import Home from "./Components/Home/Home";
+import Footer from "./Components/Footer/Footer";
 
 function App() {
   return (
     <div className="App">
-      <CreateBurger
-        burgerStack={[
-          BurgerComponentEnum.LETTUCE,
-          BurgerComponentEnum.TOMATOES,
-          BurgerComponentEnum.CHEESE,
-          BurgerComponentEnum.LETTUCE,
-          BurgerComponentEnum.TOMATOES,
-          BurgerComponentEnum.TOMATOES,
-        ]}
-      />
+      <Navbar />
+      <Home />
+      <Footer />
     </div>
   );
 }
