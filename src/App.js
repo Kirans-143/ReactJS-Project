@@ -1,17 +1,35 @@
 import React from "react";
 import "./App.css";
-import Navbar from "./Components/Navbar/Navbar";
-import Home from "./Components/Home/Home";
-import Footer from "./Components/Footer/Footer";
+import Counter from "./Counter";
 
-function App() {
+//Function Based
+/*function App() {
   return (
-    <div className="App">
-      <Navbar />
-      <Home />
-      <Footer />
+    <div className="app">
+      <Counter />
     </div>
   );
+}*/
+
+//Class Based
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      mount: false,
+    };
+  }
+
+  render() {
+    return (
+      <div className="app">
+        {this.state.mount && <Counter />}
+
+        <button onClick={() => this.setState({ mount: true })}>Mount</button>
+        <button onClick={() => this.setState({ mount: false })}>Unmount</button>
+      </div>
+    );
+  }
 }
 
 export default App;
