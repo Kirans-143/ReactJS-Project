@@ -1,32 +1,13 @@
 import React from "react";
-import "./App.css";
-import Counter from "./Counter";
+import Board from "./Component/board";
+import "./styles/box.css";
+import "./styles/board.css";
 
-//Function Based
-/*function App() {
-  return (
-    <div className="app">
-      <Counter />
-    </div>
-  );
-}*/
-
-//Class Based
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      mount: false,
-    };
-  }
-
   render() {
     return (
       <div className="app">
-        {this.state.mount && <Counter />}
-
-        <button onClick={() => this.setState({ mount: true })}>Mount</button>
-        <button onClick={() => this.setState({ mount: false })}>Unmount</button>
+        <Board />
       </div>
     );
   }
