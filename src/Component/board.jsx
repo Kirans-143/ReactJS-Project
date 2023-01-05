@@ -50,6 +50,13 @@ class Board extends Component {
 
     //handle game restart
   }
+  handleBoardRestart() {
+    this.setState({
+      boxes: Array(9).fill(null),
+      history: [],
+      xIsNext: true,
+    });
+  }
   render() {
     // get the winner only if there is any
     const winner = utils.findWinner(this.state.boxes);
@@ -66,65 +73,73 @@ class Board extends Component {
       status = `its ${this.state.xIsNext ? "x" : "o"} turn`;
     }
     return (
-      <div className="board-wrapper">
-        <div className="board">
-          <h2 className="board-heading">{status}</h2>
+      <div>
+        <div className="board-wrapper">
+          <div className="board">
+            <h2 className="board-heading">{status}</h2>
 
-          <div className="board-row">
-            <Box
-              value={this.state.boxes[0]}
-              onClick={() => this.handleBoxClicked(0)}
-            />
-            <Box
-              value={this.state.boxes[1]}
-              onClick={() => this.handleBoxClicked(1)}
-            />
-            <Box
-              value={this.state.boxes[2]}
-              onClick={() => this.handleBoxClicked(2)}
-            />
+            <div className="board-row">
+              <Box
+                value={this.state.boxes[0]}
+                onClick={() => this.handleBoxClicked(0)}
+              />
+              <Box
+                value={this.state.boxes[1]}
+                onClick={() => this.handleBoxClicked(1)}
+              />
+              <Box
+                value={this.state.boxes[2]}
+                onClick={() => this.handleBoxClicked(2)}
+              />
+            </div>
+            <div className="board-row">
+              <Box
+                value={this.state.boxes[3]}
+                onClick={() => this.handleBoxClicked(3)}
+              />
+              <Box
+                value={this.state.boxes[4]}
+                onClick={() => this.handleBoxClicked(4)}
+              />
+              <Box
+                value={this.state.boxes[5]}
+                onClick={() => this.handleBoxClicked(5)}
+              />
+            </div>
+            <div className="board-row">
+              <Box
+                value={this.state.boxes[6]}
+                onClick={() => this.handleBoxClicked(6)}
+              />
+              <Box
+                value={this.state.boxes[7]}
+                onClick={() => this.handleBoxClicked(7)}
+              />
+              <Box
+                value={this.state.boxes[8]}
+                onClick={() => this.handleBoxClicked(8)}
+              />
+            </div>
           </div>
-          <div className="board-row">
-            <Box
-              value={this.state.boxes[3]}
-              onClick={() => this.handleBoxClicked(3)}
-            />
-            <Box
-              value={this.state.boxes[4]}
-              onClick={() => this.handleBoxClicked(4)}
-            />
-            <Box
-              value={this.state.boxes[5]}
-              onClick={() => this.handleBoxClicked(5)}
-            />
-          </div>
-          <div className="board-row">
-            <Box
-              value={this.state.boxes[6]}
-              onClick={() => this.handleBoxClicked(6)}
-            />
-            <Box
-              value={this.state.boxes[7]}
-              onClick={() => this.handleBoxClicked(7)}
-            />
-            <Box
-              value={this.state.boxes[8]}
-              onClick={() => this.handleBoxClicked(8)}
-            />
-          </div>
+          {/*history of moves */}
+          <ul className="board-historyList">
+            {this.state.history.length == 0 && <span>No Moves to Show</span>}
+            {this.state.history !== 0 &&
+              this.state.history.map((move, index) => {
+                return (
+                  <li>
+                    Move {index + 1}: <strong>{move}</strong>
+                  </li>
+                );
+              })}
+          </ul>
         </div>
-        {/*history of moves */}
-        <ul className="board-historyList">
-          {this.state.history.length == 0 && <span>No Moves to Show</span>}
-          {this.state.history !== 0 &&
-            this.state.history.map((move, index) => {
-              return (
-                <li>
-                  Move {index + 1}: <strong>{move}</strong>
-                </li>
-              );
-            })}
-        </ul>
+        {/* button for restart*/}
+        {winner && (
+          <button className="btn" onClick={this.handleBoardRestart}>
+            Start Nerw Game
+          </button>
+        )}
       </div>
     );
   }
