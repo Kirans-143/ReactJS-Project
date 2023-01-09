@@ -1,26 +1,50 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.css";
-import useFetchData from "./customHooks/useFetchData";
 
-function App() {
-  const [users] = useFetchData("https://jsonplaceholder.typicode.com/users");
-  const [dogData] = useFetchData("https://picsum.photos/id/237/200/300");
+export default function App() {
+  const [todo, setTodo] = useState();
+  const [todoList, setTodoList] = useState([]);
+  console.log(todoList);
 
-  //for making a request and fetching a resource
-  //it can take more argument but one mandatory argument ----> path of the resource
-  //it returns a promise along with response of that request
-  //we fetch json file accross the network
-  //it returns a representation of that response
-  //so we extract the data json body content from Response object using json()
+  const handleChange = (event) => {
+    setTodo(event.target.value);
+  };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // let newTodoList = [...todoList];
 
+    // newTodoList.oush(todo);
+
+    // setTodoList(newTodoList);
+    setTodoList((prevTodoList) => [...prevTodoList, todo]);
+  };
   return (
-    <div>
-      {/* <h1>{JSON.stringify(users)}</h1> */}
-      {/* // called as optional chaining */}
-      <h1>{users[0]?.name}</h1>
-      <img src={dogData?.message} />
-      {/* <h1>Hello world</h1> */}
+    <div className="app">
+      <div className="app-header">
+        <h1>Todo</h1>
+      </div>
+      <form onSubmit={handleSubmit}>
+        <label className="todoLabel"> wat want today?</label>
+        <br />
+        <input
+          onChange={handleChange}
+          value={todo}
+          type="text"
+          className="input"
+        />
+        <button className="button" type="submit">
+          Submit
+        </button>
+      </form>
+      {todoList.map((todo, index) => {
+        return (
+          <div key={index} className="todo">
+            <input type="checkbox" />
+            <h4>{todo}</h4>
+            <button>Delete</button>
+          </div>
+        );
+      })}
     </div>
   );
 }
-export default App;
